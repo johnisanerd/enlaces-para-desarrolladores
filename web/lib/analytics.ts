@@ -83,7 +83,7 @@ export function trackCategoryFilter(category: string, source: string = "gallery"
  */
 export function trackShare(params: {
   title: string;
-  method: "native_share" | "clipboard";
+  method: "native_share" | "clipboard" | "whatsapp" | "x" | "linkedin" | "facebook";
   url?: string;
 }) {
   sendGAEvent("share", {
