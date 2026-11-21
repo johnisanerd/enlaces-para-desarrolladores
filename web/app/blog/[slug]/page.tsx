@@ -7,6 +7,7 @@ import { Calendar, ArrowLeft, Clock, Users } from "lucide-react";
 import { EditorialActions } from "@/components/editorial-actions";
 import { EditorialPromptCopy } from "@/components/editorial-prompt-copy";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { kitDefinitions } from "@/lib/kits";
 import type { Metadata } from "next";
 
 export const revalidate = 3600;
@@ -87,6 +88,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
   };
 
   const readingTime = calculateReadingTime(post.rawContent);
+  const relatedKits = kitDefinitions.filter((kit) => kit.relatedArticles.some((article) => article.href === `/blog/${post.slug}`));
 
   // Formatear fecha en español de forma limpia
   const formatDate = (dateStr: string) => {
@@ -336,6 +338,20 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           }
         ` }} />
 
+        {relatedKits.length > 0 && (
+          <aside aria-label="Kits relacionados" className="mb-12 border-t border-zinc-800 pt-8">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#CAFC00]">PARA SEGUIR EXPLORANDO</span>
+            <h2 className="mt-3 font-heading text-2xl font-semibold text-white">Pon las herramientas en contexto</h2>
+            <div className="mt-5 grid gap-3">
+              {relatedKits.map((kit) => (
+                <Link key={kit.slug} href={`/kits/${kit.slug}`} className="group flex items-center justify-between gap-5 rounded-xl border border-zinc-800 bg-zinc-950 p-5 hover:border-[#CAFC00]/60">
+                  <div><span className="text-xs text-zinc-500">{kit.eyebrow}</span><h3 className="mt-1 font-heading text-lg font-semibold text-white">{kit.title}</h3><p className="mt-2 text-sm text-zinc-400">{kit.outcome}</p></div>
+                  <span className="shrink-0 text-[#CAFC00]" aria-hidden="true">↗</span>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        )}
         {/* Footer actions / Share */}
         <footer className="border-t border-white/5 pt-8 flex flex-wrap items-center justify-between gap-4">
           <Link

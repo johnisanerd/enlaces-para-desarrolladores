@@ -3,6 +3,7 @@ import { getLinks } from '@/lib/data';
 import { slugify } from '@/lib/utils';
 import { getAllArticles } from '@/lib/articles';
 import { SITE_CONFIG } from '@/lib/site-config';
+import { kitDefinitions } from '@/lib/kits';
 
 export const dynamic = 'force-static';
 
@@ -40,6 +41,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.6,
     },
+    { url: `${baseUrl}/kits`, changeFrequency: 'monthly', priority: 0.8 },
+    ...kitDefinitions.map(kit => ({ url: `${baseUrl}/kits/${kit.slug}`, changeFrequency: 'monthly' as const, priority: 0.75 })),
     ...categoryEntries,
     ...blogEntries,
   ];
