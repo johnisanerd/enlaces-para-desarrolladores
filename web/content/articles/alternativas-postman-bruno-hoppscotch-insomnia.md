@@ -11,7 +11,7 @@ tldr:
 imageAlt: "Comparativa de clientes HTTP para probar APIs"
 ---
 
-Una colección de peticiones puede terminar siendo :mark[parte del proyecto]: alguien modifica una ruta, otra persona actualiza una variable y de pronto hay dos versiones de la misma API. Para comparar Bruno, Hoppscotch e Insomnia, me fijé especialmente en :large[cómo encajan las colecciones] en el trabajo diario y qué tendría que comprobar antes de adoptarlos.
+Una colección de peticiones puede terminar siendo :icon[parte del proyecto|code]: alguien modifica una ruta, otra persona actualiza una variable y de pronto hay dos versiones de la misma API. Para comparar Bruno, Hoppscotch e Insomnia, me fijé especialmente en :large[cómo encajan las colecciones] en el trabajo diario y qué tendría que comprobar antes de adoptarlos.
 
 Revisé la documentación pública de [Bruno](https://www.usebruno.com/), [Hoppscotch](https://hoppscotch.io/) e [Insomnia](https://insomnia.rest/). No ejecuté un benchmark. El objetivo aquí es acotar una prueba que revele diferencias útiles para un equipo.
 
