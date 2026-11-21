@@ -8,6 +8,7 @@
     "build": "node ../scripts/generate-llms-txt.mjs && node ./scripts/generate-post-covers.mjs && next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:editorial": "node scripts/lint-editorial.mjs",
     "test": "node --experimental-strip-types --test lib/**/*.test.ts",
     "generate-llms": "node ../scripts/generate-llms-txt.mjs",
     "generate-covers": "node ./scripts/generate-post-covers.mjs"

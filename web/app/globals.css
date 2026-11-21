@@ -9,7 +9,7 @@
   --color-accent: var(--accent);
 
   --font-sans: var(--font-roboto);
-  --font-heading: var(--font-roboto);
+  --font-heading: var(--font-space-grotesk);
   --font-serif: "Newsreader", "Playfair Display", "Georgia", "Cambria", "Times New Roman", serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }

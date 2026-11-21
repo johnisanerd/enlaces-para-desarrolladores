@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
 import { Calendar, ArrowLeft, Clock } from "lucide-react";
 import { ShareButton } from "@/components/share-button";
+import { EditorialPromptCopy } from "@/components/editorial-prompt-copy";
 import { SITE_CONFIG } from "@/lib/site-config";
 import type { Metadata } from "next";
 
@@ -121,7 +122,39 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
 
       <SiteHeader />
 
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.copy,
+            mainEntityOfPage: `${SITE_CONFIG.url}/blog/${post.slug}`,
+            url: `${SITE_CONFIG.url}/blog/${post.slug}`,
+            datePublished: post.date,
+            ...(post.updated ? { dateModified: post.updated } : {}),
+            author: { "@type": "Person", name: SITE_CONFIG.author.name, url: SITE_CONFIG.author.url },
+            publisher: { "@type": "Organization", name: SITE_CONFIG.name, url: SITE_CONFIG.url },
+            image: post.image.startsWith("http") ? post.image : `${SITE_CONFIG.url}${post.image}`,
+            inLanguage: "es"
+          },
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_CONFIG.url },
+              { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_CONFIG.url}/blog` },
+              { "@type": "ListItem", position: 3, name: post.title, item: `${SITE_CONFIG.url}/blog/${post.slug}` }
+            ]
+          }
+        ]
+      }).replace(/</g, "\\u003c") }} />
+      <EditorialPromptCopy />
       <div className="pt-32 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-20">
+        <nav aria-label="Ruta de navegación" className="mb-6 flex flex-wrap items-center gap-2 text-xs text-zinc-400">
+          <Link href="/" className="hover:text-white">Inicio</Link><span aria-hidden="true">/</span>
+          <Link href="/blog" className="hover:text-white">Blog</Link><span aria-hidden="true">/</span>
+          <span aria-current="page" className="text-zinc-200">{post.title}</span>
+        </nav>
         {/* Back Link Button */}
         <Link
           href="/blog"
@@ -159,6 +192,35 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           </div>
         </header>
 
+        {post.tldr.length > 0 && (
+          <aside aria-labelledby="article-tldr" className="editorial-tldr mb-10 rounded-2xl border border-[#CAFC00]/25 bg-zinc-950/80 p-5 sm:p-7">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#CAFC00]" aria-hidden="true" />
+              <h2 id="article-tldr" className="font-heading text-lg font-bold tracking-tight text-white">En pocas palabras</h2>
+              <span className="ml-auto font-mono text-xs font-semibold uppercase tracking-widest text-[#CAFC00]">TL;DR</span>
+            </div>
+            <ul className="space-y-3 text-sm leading-relaxed text-zinc-300 sm:text-base">
+              {post.tldr.map((point, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <span aria-hidden="true" className="mt-0.5 font-mono font-bold text-[#CAFC00]">0{index + 1}</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+        {post.toc.length >= 2 && (
+          <nav aria-label="Tabla de contenidos" className="mb-10 rounded-xl border border-zinc-800 bg-zinc-950/70 p-5">
+            <h2 className="mb-3 text-sm font-semibold text-white">En este artículo</h2>
+            <ol className="space-y-2 text-sm">
+              {post.toc.map((heading) => (
+                <li key={heading.id} className={heading.level === 3 ? "pl-4" : ""}>
+                  <a href={`#${heading.id}`} className="text-zinc-400 hover:text-[#CAFC00]">{heading.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
         {/* Dynamic HTML Content with custom styles (Markdown compiler result) */}
         <article className="prose-custom mb-16 text-zinc-300 leading-relaxed text-base sm:text-lg">
           <div
@@ -169,6 +231,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
 
         {/* Stylesheet inline para formatear el Markdown de forma premium y limpia */}
         <style dangerouslySetInnerHTML={{ __html: `
+          .prose-custom h2, .prose-custom h3 { scroll-margin-top: 7rem; font-family: var(--font-space-grotesk), sans-serif; }
           .prose-custom h2 {
             font-size: 1.5rem;
             font-weight: 800;
@@ -241,6 +304,20 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             border: none;
             color: #e4e4e7;
           }
+          .prose-custom .editorial-table-scroll { overflow-x: auto; margin: 1.5rem 0; border-radius: .5rem; }
+          .prose-custom table { width: 100%; border-collapse: collapse; min-width: 520px; font-size: .875rem; }
+          .prose-custom th, .prose-custom td { border: 1px solid #3f3f46; padding: .75rem; text-align: left; vertical-align: top; }
+          .prose-custom th { background: #18181b; color: #fff; }
+          .prose-custom .editorial-prompt { border: 1px solid #52525b; border-radius: .75rem; overflow: hidden; margin: 2rem 0; }
+          .prose-custom .editorial-prompt-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem 1rem; background: #18181b; color: #fff; font-size: .875rem; font-weight: 600; }
+          .prose-custom .editorial-prompt-header button { background: #CAFC00; color: #090909; border-radius: .5rem; padding: .6rem .9rem; font-weight: 700; cursor: pointer; }
+          .prose-custom .editorial-prompt pre { margin: 0; border: 0; border-radius: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+          .prose-custom .editorial-large { font-family: var(--font-space-grotesk), sans-serif; font-size: clamp(1.06em, 1.25em, 1.35em); font-weight: 750; color: #fff; letter-spacing: -.025em; }
+          .prose-custom .editorial-mark { color: #CAFC00; font-weight: 700; text-decoration-line: underline; text-decoration-color: rgba(202, 252, 0, .4); text-underline-offset: .2em; }
+          .prose-custom .editorial-shine { color: #CAFC00; font-weight: 750; background: linear-gradient(110deg, #CAFC00 0%, #CAFC00 35%, #fff 48%, #CAFC00 61%, #CAFC00 100%); background-size: 260% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: editorial-shine 7s linear infinite; }
+          @keyframes editorial-shine { 0%, 32% { background-position: 110% center; } 65%, 100% { background-position: -110% center; } }
+          @media (prefers-reduced-motion: reduce) { .prose-custom .editorial-shine { animation: none; background: none; -webkit-text-fill-color: initial; color: #CAFC00; } }
+          @media (prefers-contrast: more) { .prose-custom .editorial-shine { animation: none; background: none; -webkit-text-fill-color: initial; color: #CAFC00; } }
           .prose-custom blockquote {
             border-left: 4px solid #CAFC00;
             padding-left: 1.25rem;

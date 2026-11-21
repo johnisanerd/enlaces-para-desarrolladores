@@ -53,6 +53,52 @@ Ejemplo listo para copiar:
 Compara tres formas de procesar archivos PDF en el navegador sin subir el documento a un servidor: PDF.js, pdf-lib y una herramienta web con procesamiento local. Explica qué permite hacer cada opción, sus límites y cómo verificar si realmente procesa archivos en el dispositivo. Presenta una tabla con privacidad, funciones, licencia y facilidad de integración. Distingue hechos documentados de suposiciones, incluye enlaces oficiales verificables y recomienda una opción para leer PDFs y otra para editarlos. Si no puedes comprobar un dato, indícalo.
 ```
 
+## Encabezados con ritmo editorial
+- Los H2 y H3 pueden ser **preguntas, frases breves o afirmaciones**. Elegir según intención y lectura: no seguir un patrón fijo ni exigir una cuota de preguntas.
+- Una pregunta es útil cuando anticipa la duda concreta de quien lee; una frase corta sirve para orientar, hacer una transición o marcar una conclusión.
+- Evitar titulares repetidos que podrían trasladarse a cualquier artículo cambiando el nombre de la herramienta.
+- Mantener la jerarquía semántica de encabezados para que el índice automático sea útil.
+
+## Personalidad escritora: el curador que abre el taller
+Quien narra es un desarrollador curioso, algo escéptico ante las promesas del marketing y generoso al mostrar cómo llegar a una respuesta. La voz se reconoce por su atención a las consecuencias prácticas, no por muletillas.
+- **Persigue una pregunta específica.** Muestra por qué importa y qué criterios permiten decidir.
+- **Tiene criterio, no dogmas.** Puede inclinarse por una alternativa, pero dice para qué escenario y con qué límites.
+- **No finge un laboratorio.** Distingue entre documentación consultada, deducción, ejemplo ilustrativo y prueba ejecutada.
+- **Habla como alguien que usaría lo que describe.** Nombra archivos, operaciones, obstáculos y comprobaciones concretas.
+- **Deja espacio al lector.** No explica lo evidente ni infla párrafos para llenar un esquema SEO.
+- **Tiene humor discreto cuando cabe**, sin convertir toda comparación en una broma.
+- **Varía la cadencia.** Algunas ideas piden un párrafo largo; otras una línea corta. No repetir una plantilla de apertura y cierre.
+- **Construye escenas pequeñas verificables**, como el punto en que una colección de API debe entrar en Git, en vez de narrar anécdotas personales inexistentes.
+- **Da una respuesta útil antes de adornarla.** El estilo acompaña a la explicación.
+
+## Sistema de énfasis editorial
+Se mantiene Markdown por ahora: añadir MDX completo sería un salto de complejidad innecesario para tres tratamientos tipográficos y un resumen. Las directivas seguras permiten una composición más libre sin ejecutar componentes arbitrarios de autores:
+- `:mark[texto]`: énfasis sobrio en verde, útil para una idea clave.
+- `:large[texto]`: una frase o pocas palabras ligeramente mayores para crear ritmo.
+- `:shine[texto]`: brillo animado lento reservado para una palabra decisiva, sin usarlo en cada sección.
+- Campo de frontmatter `tldr`: array de 2 a 4 ideas en texto claro; aparece al principio del artículo bajo «En pocas palabras».
+
+Estos recursos **no son requisitos por artículo**. Deben ser excepcionales y dar pistas semánticas, no llamar la atención sin motivo. Una página puede prescindir completamente de animaciones. Respetar `prefers-reduced-motion` y no introducir información que solo se entienda gracias al efecto. No colocar directivas en títulos o metadatos; funcionan dentro del contenido Markdown.
+
+Ejemplo:
+```md
+---
+tldr:
+  - "PDF.js sirve para mostrar páginas; pdf-lib trabaja con creación y modificación."
+  - "Puedo usar las dos bibliotecas en una aplicación si necesito ambos flujos."
+---
+
+## Dos bibliotecas, dos operaciones
+
+Mostrar un archivo y modificarlo son :large[tareas distintas]. Antes de elegir, me importa :mark[qué hará el usuario]. La :shine[privacidad] también depende de si la aplicación envía datos a un servidor.
+```
+
+## Revisión automatizada
+- Ejecutar `cd web && npm run lint:editorial` sobre los artículos piloto; admite rutas Markdown como argumentos.
+- El validador marca fórmulas genéricas y falla cuando detecta campos por rellenar en prompts.
+- No pretende identificar quién escribió un texto ni emite porcentajes de IA: requiere una revisión humana posterior.
+- Se puede ampliar el control con un motor como [textlint](https://github.com/textlint/textlint) y reglas propias para español.
+
 ## Revisión de estilo antes de publicar
 1. Entrar directamente en el problema, una observación verificable o una decisión; quitar aperturas tipo «En el mundo actual» y preámbulos vacíos.
 2. Sustituir afirmaciones amplias («revolucionario», «imprescindible», «potente», «lleva al siguiente nivel») por una función, condición o limitación concreta.
