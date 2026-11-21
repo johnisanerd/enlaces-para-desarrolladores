@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy, FileText, Share2, Link as LinkIcon, ChevronDown } from "lucide-react";
+import { Check, FileText, Share2, Link as LinkIcon, ChevronDown } from "lucide-react";
 import { trackShare } from "@/lib/analytics";
 
 interface Props { title: string; description: string; markdown: string; }
@@ -45,7 +45,7 @@ export function EditorialActions({ title, description, markdown }: Props) {
         {open && (
           <div className="absolute bottom-full right-0 z-20 mb-2 w-44 rounded-xl border border-zinc-700 bg-zinc-950 p-2 shadow-xl" aria-label="Opciones para compartir">
             {socialLinks.map((social) => (
-              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" onClick={() => { trackShare({ title, method: social.name.toLowerCase(), url: getUrl() }); setOpen(false); }} className="block rounded-md px-3 py-2 text-sm text-zinc-200 hover:bg-zinc-800">{social.name}</a>
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" onClick={() => { trackShare({ title, method: "clipboard", url: getUrl() }); setOpen(false); }} className="block rounded-md px-3 py-2 text-sm text-zinc-200 hover:bg-zinc-800">{social.name}</a>
             ))}
             <button type="button" onClick={() => { void copy(getUrl(), "link"); setOpen(false); }} className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-zinc-200 hover:bg-zinc-800">
               <LinkIcon className="h-4 w-4" /> Copiar enlace
