@@ -1,7 +1,7 @@
 "use client";
 
 import { HeroNetworkBackground } from "@/components/hero-network-background";
-import { Github, PlusCircle, Command } from "lucide-react";
+import { Github, PlusCircle, Command, FileText } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 export function Hero() {
@@ -38,6 +38,16 @@ export function Hero() {
             <span>⌘K Buscar</span>
           </button>
 
+          <a
+            href="/llms.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-colors text-xs"
+            title="Índice del catálogo para asistentes de IA"
+          >
+            <FileText className="h-3 w-3" />
+            <span>Catálogo para IA · llms.txt</span>
+          </a>
           <a
             href={SITE_CONFIG.links.github}
             target="_blank"

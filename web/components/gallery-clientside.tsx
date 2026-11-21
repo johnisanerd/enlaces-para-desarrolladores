@@ -2,11 +2,12 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { LinkRow } from "@/components/link-row";
+import { AiExplorer } from "@/components/ai-explorer";
 import { getCategoryColor } from "@/lib/colors";
 import { slugify } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { Loader2, Search, Download, Copy, Trash2, Check, X } from "lucide-react";
+import { Loader2, Search, Download, Copy, Trash2, Check, X, Sparkles } from "lucide-react";
 import { createSearchIndex } from "@/lib/search";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { trackCategoryFilter, trackFavoriteToggle } from "@/lib/analytics";
@@ -38,6 +39,7 @@ export function GalleryClientSide({ initialCategories }: { initialCategories: Ca
   const [favorites, setFavorites] = useState<LinkItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [aiExplorerOpen, setAiExplorerOpen] = useState(false);
 
   // Focus search input when pressing '/'
   useEffect(() => {
@@ -435,6 +437,19 @@ export function GalleryClientSide({ initialCategories }: { initialCategories: Ca
           })
         )}
       </div>
+
+      {/* Acción IA: reutiliza Mi Toolkit, sin una segunda selección paralela */}
+      {isLoaded && favorites.length > 0 && (
+        <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-40 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-3 rounded-full border border-zinc-700 bg-zinc-950/95 px-3 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.65)] backdrop-blur-md">
+          <span className="hidden sm:inline text-xs text-zinc-400">{favorites.length} en Mi Toolkit</span>
+          <button type="button" onClick={() => setAiExplorerOpen(true)} className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-4 py-2 text-xs font-bold text-black transition-all hover:brightness-110">
+            <Sparkles className="h-3.5 w-3.5" /> Consultar con IA
+          </button>
+        </div>
+      )}
+      {aiExplorerOpen && favorites.length > 0 && (
+        <AiExplorer resources={favorites} onClose={() => setAiExplorerOpen(false)} />
+      )}
 
       {/* Botón Cargar Más */}
       {filteredCategories.some((cat) => cat.links.length > visibleCount) && (

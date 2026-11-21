@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Github, Loader2 } from "lucide-react";
+import { Search, Github, Loader2, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState,  Suspense, useTransition } from "react";
@@ -100,6 +100,17 @@ function SiteHeaderContent() {
             />
         </div>
         
+        <a
+            href="/llms.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Catálogo para asistentes de IA (llms.txt)"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-300 hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-colors"
+        >
+            <FileText className="h-4 w-4" />
+            <span className="hidden md:inline">llms.txt</span>
+            <span className="sr-only md:hidden">Catálogo para IA</span>
+        </a>
         <a 
             href={SITE_CONFIG.links.github} 
             target="_blank" 
