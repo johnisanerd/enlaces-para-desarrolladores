@@ -38,7 +38,7 @@ Ahí miraría pdf-lib. Tiene APIs para crear documentos, trabajar con páginas y
 
 ## ¿Dónde se procesa realmente el archivo?
 
-Que una biblioteca pueda ejecutarse en el navegador no garantiza por sí solo que la aplicación conserve la :shine[privacidad]. Si la web envía el archivo a una API, deja de ser procesamiento exclusivamente local. Para comprobarlo, inspeccionaría la pestaña Network del navegador mientras cargo y proceso un PDF de prueba que no contenga datos sensibles.
+Que una biblioteca pueda ejecutarse en el navegador no garantiza por sí solo que la aplicación conserve la :icon[privacidad|lock]. Si la web envía el archivo a una API, deja de ser procesamiento exclusivamente local. Para comprobarlo, inspeccionaría la pestaña Network del navegador mientras cargo y proceso un PDF de prueba que no contenga datos sensibles.
 
 ## ¿Puedo construir un visor y un editor sencillo con ambas?
 
