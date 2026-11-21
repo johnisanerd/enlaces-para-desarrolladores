@@ -102,7 +102,14 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     const toc: { id: string; text: string; level: number }[] = [];
     const seen = new Map<string, number>();
     const renderer = new Renderer();
+    let inReferences = false;
+    const baseList = renderer.list;
+    renderer.list = function (token) {
+      const html = baseList.call(this, token);
+      return inReferences ? `<nav class="editorial-references-tree" aria-label="Fuentes y enlaces">${html}</nav>` : html;
+    };
     renderer.heading = function ({ text, depth, tokens }) {
+      if (depth === 2) inReferences = /^referencias(?: y fuentes)?$/i.test(text.trim());
       const label = text.replace(/<[^>]+>/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`]/g, "");
       const base = label.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "seccion";
       const count = seen.get(base) || 0;
@@ -125,6 +132,15 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     // No ejecutan JSX, JavaScript ni HTML escrito por autores.
     const escapeHtml = (value: string) =>
       value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    // Los iconos admitidos son parte de una lista fija; nunca se procesa SVG arbitrario desde Markdown.
+    const editorialIcons: Record<string, { label: string; shapes: string }> = {
+      shield: { label: "Seguridad", shapes: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>' },
+      lock: { label: "Privacidad", shapes: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>' },
+      sparkles: { label: "Idea", shapes: '<path d="m12 3 1.9 6.1L20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3Z"/><path d="m19 18 .6 1.4L21 20l-1.4.6L19 22l-.6-1.4L17 20l1.4-.6L19 18Z"/>' },
+      code: { label: "Código", shapes: '<path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-14-2 20"/>' },
+      terminal: { label: "Terminal", shapes: '<rect x="2" y="3" width="20" height="18" rx="2"/><path d="m6 9 4 3-4 3m6 1h6"/>' },
+      link: { label: "Enlace", shapes: '<path d="M10 13a5 5 0 0 0 7 .5l3-3a5 5 0 0 0-7-7l-2 2"/><path d="M14 11a5 5 0 0 0-7-.5l-3 3a5 5 0 0 0 7 7l2-2"/>' },
+    };
     const editorialKinds = ["shine", "large", "mark"] as const;
     const parser = new Marked({ renderer });
     parser.use({
@@ -145,6 +161,30 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
           return `<span class="editorial-${kind}">${escapeHtml(String(token.text ?? ""))}</span>`;
         },
       })),
+    });
+    parser.use({
+      extensions: [{
+        name: "editorial-icon",
+        level: "inline" as const,
+        start: (src: string) => src.indexOf(":icon["),
+        tokenizer(src: string) {
+          if (!src.startsWith(":icon[")) return;
+          const end = src.indexOf("]", 6);
+          if (end < 0) return;
+          const value = src.slice(6, end);
+          const separator = value.lastIndexOf("|");
+          if (separator < 1) return;
+          const text = value.slice(0, separator).trim();
+          const name = value.slice(separator + 1).trim().toLowerCase();
+          if (!text || text.length > 100 || text.includes("[") || text.includes("\n") || !editorialIcons[name]) return;
+          return { type: "editorial-icon", raw: src.slice(0, end + 1), text, name };
+        },
+        renderer(token) {
+          const data = editorialIcons[String(token.name)] ;
+          if (!data) return escapeHtml(String(token.text ?? ""));
+          return `<span class="editorial-with-icon">${escapeHtml(String(token.text ?? ""))}<sup class="editorial-sup-icon" aria-label="${data.label}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${data.shapes}</svg></sup></span>`;
+        },
+      }],
     });
     const rawHtml = await parser.parse(content);
     const processedContent = DOMPurify.sanitize(rawHtml);
