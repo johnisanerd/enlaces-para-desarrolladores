@@ -12,6 +12,9 @@ export const metadata = {
   title: `Blog Oficial | ${SITE_CONFIG.name}`,
   description:
     "Guías, análisis y colecciones de herramientas de código abierto y utilidades para programadores y creadores.",
+  alternates: {
+    canonical: `${SITE_CONFIG.url}/blog`,
+  },
   openGraph: {
     title: `Blog Oficial | ${SITE_CONFIG.name}`,
     description:
