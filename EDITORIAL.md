@@ -76,7 +76,7 @@ Se mantiene Markdown por ahora: añadir MDX completo sería un salto de compleji
 - `:mark[texto]`: énfasis sobrio en verde, útil para una idea clave.
 - `:large[texto]`: una frase o pocas palabras ligeramente mayores para crear ritmo.
 - `:shine[texto]`: brillo animado lento reservado para una palabra decisiva, sin usarlo en cada sección.
-- Campo de frontmatter `tldr`: array de 2 a 4 ideas en texto claro; aparece al principio del artículo bajo «En pocas palabras».
+- Campo de frontmatter `tldr`: array de 2 a 4 ideas en texto claro; aparece al principio del artículo bajo «En pocas palabras», sin caja ornamental ni borde.
 
 Estos recursos **no son requisitos por artículo**. Deben ser excepcionales y dar pistas semánticas, no llamar la atención sin motivo. Una página puede prescindir completamente de animaciones. Respetar `prefers-reduced-motion` y no introducir información que solo se entienda gracias al efecto. No colocar directivas en títulos o metadatos; funcionan dentro del contenido Markdown.
 
@@ -131,3 +131,8 @@ Estas reglas son criterios de edición, no prohibiciones mecánicas. No sacrific
 «Quería resolver una tarea sencilla: trabajar con PDFs sin enviar archivos a un servidor. Revisé varias opciones y descubrí que la diferencia importante no era cuántos botones tenían, sino dónde se procesaban los documentos. En esta guía comparo lo que pude verificar y explico en qué casos elegiría cada una.»
 
 Esta apertura **no** afirma que se instalaron o probaron herramientas; solo expresa una investigación documental.
+
+## Referencias y acciones del lector
+- Una sección `## Referencias` con una lista Markdown de enlaces se presenta automáticamente como un árbol de fuentes.
+- El pie de artículo indica `El Equipo` como responsable editorial, sin atribuir una experiencia personal a nadie.
+- El botón **Compartir** ofrece compartir nativamente o abrir WhatsApp, X, LinkedIn y Facebook; el botón **Copiar contenido** copia el cuerpo Markdown original del artículo, sin frontmatter.
