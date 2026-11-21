@@ -887,6 +887,7 @@ Recopilado por [Yamil Ayma](https://github.com/YamilAyma)
 - [shadcn-templ](https://shadcn-templ.com/): Colección de componentes accesibles y estilizados para Go y Templ.
 - [GreatUI](https://www.great-ui.com/): Componentes animadas para React creadas con TypeScript, Tailwind CSS y Motion.
 - [morphicons](https://www.morphicons.com/): Librería ligera para metamorfosis y transiciones fluidas entre iconos SVG.
+- [Flubber](https://github.com/veltman/flubber): Librería de JavaScript para interpolar y transformar formas SVG mediante transiciones fluidas, ideal para animaciones de iconos y gráficos interactivos.
 - [Watermelon UI](https://ui.watermelon.sh/home): Colección de componentes UI, paneles y bloques listos para aplicaciones React.
 - [sonner](https://sonner.emilkowal.ski/): Librería de notificaciones tipo toast elegante y ligera para aplicaciones React.
 - [web-haptics](https://haptics.lochie.me/): Biblioteca para añadir respuestas táctiles y hápticas en la web móvil.
