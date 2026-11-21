@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { getAllArticles, getArticleBySlug } from "@/lib/articles";
-import { Calendar, ArrowLeft, Clock } from "lucide-react";
-import { ShareButton } from "@/components/share-button";
+import { Calendar, ArrowLeft, Clock, Users } from "lucide-react";
+import { EditorialActions } from "@/components/editorial-actions";
 import { EditorialPromptCopy } from "@/components/editorial-prompt-copy";
 import { SITE_CONFIG } from "@/lib/site-config";
 import type { Metadata } from "next";
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
       type: "article",
       url: postUrl,
       publishedTime: post.date,
-      authors: [SITE_CONFIG.author.name],
+      authors: ["El Equipo"],
       images: [
         {
           url: imageUrl,
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             url: `${SITE_CONFIG.url}/blog/${post.slug}`,
             datePublished: post.date,
             ...(post.updated ? { dateModified: post.updated } : {}),
-            author: { "@type": "Person", name: SITE_CONFIG.author.name, url: SITE_CONFIG.author.url },
+            author: { "@type": "Organization", name: "El Equipo", url: SITE_CONFIG.url },
             publisher: { "@type": "Organization", name: SITE_CONFIG.name, url: SITE_CONFIG.url },
             image: post.image.startsWith("http") ? post.image : `${SITE_CONFIG.url}${post.image}`,
             inLanguage: "es"
@@ -186,16 +186,15 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
               <span>{readingTime}</span>
             </div>
             <div className="flex items-center gap-1.5 ml-auto">
-              <span className="text-xs">Por</span>
-              <span className="font-bold text-zinc-300">{SITE_CONFIG.author.name}</span>
+              <Users aria-hidden="true" className="h-4 w-4" />
+              <span className="font-bold text-zinc-300">El Equipo</span>
             </div>
           </div>
         </header>
 
         {post.tldr.length > 0 && (
-          <aside aria-labelledby="article-tldr" className="editorial-tldr mb-10 rounded-2xl border border-[#CAFC00]/25 bg-zinc-950/80 p-5 sm:p-7">
+          <aside aria-labelledby="article-tldr" className="editorial-tldr mb-10 py-2">
             <div className="mb-4 flex items-center gap-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#CAFC00]" aria-hidden="true" />
               <h2 id="article-tldr" className="font-heading text-lg font-bold tracking-tight text-white">En pocas palabras</h2>
               <span className="ml-auto font-mono text-xs font-semibold uppercase tracking-widest text-[#CAFC00]">TL;DR</span>
             </div>
@@ -318,6 +317,16 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           @keyframes editorial-shine { 0%, 32% { background-position: 110% center; } 65%, 100% { background-position: -110% center; } }
           @media (prefers-reduced-motion: reduce) { .prose-custom .editorial-shine { animation: none; background: none; -webkit-text-fill-color: initial; color: #CAFC00; } }
           @media (prefers-contrast: more) { .prose-custom .editorial-shine { animation: none; background: none; -webkit-text-fill-color: initial; color: #CAFC00; } }
+          .prose-custom .editorial-with-icon { display: inline; white-space: normal; }
+          .prose-custom .editorial-sup-icon { display: inline-flex; position: relative; top: -.28em; margin-left: .18em; vertical-align: super; color: #CAFC00; line-height: 1; }
+          .prose-custom .editorial-sup-icon svg { display: inline-block; width: .77em; height: .77em; }
+          .prose-custom .editorial-references-tree { margin: 1rem 0 2rem; }
+          .prose-custom .editorial-references-tree ul { list-style: none; margin: 0; padding-left: 1.4rem; border-left: 1px solid rgba(202,252,0,.35); }
+          .prose-custom .editorial-references-tree li { position: relative; margin: 0; padding: .5rem 0 .5rem 1rem; }
+          .prose-custom .editorial-references-tree li::before { content: ""; position: absolute; left: -1.4rem; top: 1.18rem; width: 1.3rem; border-top: 1px solid rgba(202,252,0,.35); }
+          .prose-custom .editorial-references-tree li:last-child::after { content: ""; position: absolute; left: -1.45rem; top: 1.2rem; bottom: 0; width: 2px; background: #090909; }
+          .prose-custom .editorial-references-tree a { display: inline-flex; align-items: center; gap: .35rem; text-decoration: none; overflow-wrap: anywhere; }
+          .prose-custom .editorial-references-tree a::after { content: "↗"; font-size: .72em; opacity: .7; }
           .prose-custom blockquote {
             border-left: 4px solid #CAFC00;
             padding-left: 1.25rem;
@@ -328,7 +337,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
         ` }} />
 
         {/* Footer actions / Share */}
-        <footer className="border-t border-white/5 pt-8 flex items-center justify-between">
+        <footer className="border-t border-white/5 pt-8 flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-sm font-bold text-zinc-500 hover:text-white transition-colors duration-200"
@@ -337,7 +346,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             <span>Volver a la lista</span>
           </Link>
 
-          <ShareButton title={post.title} copy={post.copy} />
+          <EditorialActions title={post.title} description={post.copy} markdown={post.rawContent} />
         </footer>
       </div>
 
