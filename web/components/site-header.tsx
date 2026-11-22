@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Github, Loader2 } from "lucide-react";
+import { Search, Github, Loader2, FileText, Layers3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState,  Suspense, useTransition } from "react";
@@ -69,6 +69,7 @@ function SiteHeaderContent() {
              </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6 ml-4 border-l border-white/10 pl-6">
+          <Link href="/kits" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#CAFC00] hover:text-white transition-colors"><Layers3 className="h-4 w-4"/> Kits</Link>
           <Link
             href="/blog"
             className="text-sm font-semibold text-zinc-400 hover:text-[var(--primary)] transition-colors duration-200"
@@ -87,6 +88,7 @@ function SiteHeaderContent() {
       <div />
 
       <div className="flex items-center gap-3">
+        <Link href="/kits" className="hidden sm:inline-flex md:hidden items-center gap-1.5 rounded-full border border-[#CAFC00]/25 px-3 py-2 text-xs font-semibold text-[#CAFC00]"><Layers3 className="h-4 w-4" /><span className="hidden sm:inline">Kits</span></Link>
         <div className="relative hidden sm:block group">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-[var(--primary)] transition-colors">
                 {isPending ? <Loader2 className="h-4 w-4 animate-spin text-[var(--primary)]" /> : <Search className="h-4 w-4" />}
@@ -100,6 +102,17 @@ function SiteHeaderContent() {
             />
         </div>
         
+        <a
+            href="/llms.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Catálogo para asistentes de IA (llms.txt)"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-300 hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-colors"
+        >
+            <FileText className="h-4 w-4" />
+            <span className="hidden md:inline">llms.txt</span>
+            <span className="sr-only md:hidden">Catálogo para IA</span>
+        </a>
         <a 
             href={SITE_CONFIG.links.github} 
             target="_blank" 

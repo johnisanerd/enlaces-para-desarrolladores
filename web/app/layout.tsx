@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Roboto, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { getLinks } from "@/lib/data";
@@ -10,6 +10,12 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-roboto",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -126,7 +132,7 @@ export default async function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${roboto.variable} font-sans antialiased`}
+        className={`${roboto.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>

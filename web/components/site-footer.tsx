@@ -29,6 +29,7 @@ export function SiteFooter() {
           <div className="flex flex-col gap-4">
             <h3 className="text-sm font-bold text-white tracking-wider uppercase">Recursos</h3>
             <ul className="flex flex-col gap-2.5 text-sm text-zinc-400">
+              <li><Link href="/kits" className="font-semibold text-[#CAFC00] hover:text-white">Kits para construir</Link></li>
               <li>
                 <Link href="/categoria/packs" className="hover:text-[var(--primary)] transition-colors duration-200">
                   Packs de Recursos

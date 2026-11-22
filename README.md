@@ -450,6 +450,7 @@ Recopilado por [Yamil Ayma](https://github.com/YamilAyma)
 
 - [Telemetry SQL Playground](https://telemetry.sh/sql/playground?lang=es): Entorno gratuito en español para practicar consultas SQL sobre eventos sintéticos de API, sin crear una cuenta.
 - [A Box of Tools](https://abox.tools/es/): Caja de 35 herramientas de archivo que funcionan enteramente en el navegador: comprimir una imagen a un tamaño exacto, unir o censurar un PDF, recortar vídeo, editar audio, leer códigos QR, formatear JSON. Nada se sube a ningún servidor. Código abierto (MIT) y traducida al español.
+- [Nyxiontech PDF Tools](https://tools.nyxiontech.com): Suite de herramientas de código abierto para editar, convertir, comprimir y censurar archivos PDF directamente en el navegador, con procesamiento local y opciones de autoalojamiento.
 - [PDF Fan — Extraer páginas de un PDF](https://pdf.fan/es/extraer-paginas-pdf/): Herramienta gratuita en español y sin registro para seleccionar páginas por miniatura o por rangos (por ejemplo, 2, 5–7). Permite previsualizar cada página y exporta la selección en el orden del documento original. El PDF original se procesa en el navegador y se sube una copia temporal del resultado para el enlace de descarga.
 - [zdoc](https://www.zdoc.app/es): Herramienta gratuita para traducir READMEs de GitHub a múltiples idiomas y mantenerlos actualizados.
 - [muJS](https://mujs.org/): Librería de navegación AJAX de 5KB como alternativa ligera a Turbo y htmx.
@@ -887,6 +888,9 @@ Recopilado por [Yamil Ayma](https://github.com/YamilAyma)
 - [shadcn-templ](https://shadcn-templ.com/): Colección de componentes accesibles y estilizados para Go y Templ.
 - [GreatUI](https://www.great-ui.com/): Componentes animadas para React creadas con TypeScript, Tailwind CSS y Motion.
 - [morphicons](https://www.morphicons.com/): Librería ligera para metamorfosis y transiciones fluidas entre iconos SVG.
+- [Flubber](https://github.com/veltman/flubber): Librería de JavaScript para interpolar y transformar formas SVG mediante transiciones fluidas, ideal para animaciones de iconos y gráficos interactivos.
+- [Zdog](https://github.com/metafizzy/zdog): Motor ligero de pseudo-3D para JavaScript que permite crear y animar ilustraciones tridimensionales mediante Canvas o SVG, con una estética vectorial y sencilla.
+- [Perfect Freehand](https://github.com/steveruizok/perfect-freehand): Librería de JavaScript para crear trazos de dibujo a mano con grosor variable y sensibilidad a la presión, ideal para pizarras, firmas y herramientas de anotación.
 - [Watermelon UI](https://ui.watermelon.sh/home): Colección de componentes UI, paneles y bloques listos para aplicaciones React.
 - [sonner](https://sonner.emilkowal.ski/): Librería de notificaciones tipo toast elegante y ligera para aplicaciones React.
 - [web-haptics](https://haptics.lochie.me/): Biblioteca para añadir respuestas táctiles y hápticas en la web móvil.
@@ -1511,6 +1515,7 @@ Recopilado por [Yamil Ayma](https://github.com/YamilAyma)
 - [Webwright](https://github.com/microsoft/CUAWright): Framework de Microsoft Research para agentes de IA terminal-native. Permite al modelo escribir y ejecutar su propio código de Playwright para resolver tareas web complejas.
 - [Impeccable](https://github.com/pbakaus/impeccable): Kit para agentes de IA a orientarlos para que puedan ser más eficaces en el diseño frontend. 1 Skill.
 - [YYLO](https://github.com/yylo-dev/yylo): Orquestador de código abierto para agentes de codificación en la terminal, con flujos de trabajo repetibles y cambios de repositorio respaldados por evidencia.
+- [ai-photo-to-video-prompt-recipes](https://siuserxiaowei.github.io/ai-photo-to-video-prompt-recipes/es/): Guía interactiva de código abierto (MIT) en español con benchmark de 480 pruebas y 12 recetas de prompts en 2 pasos (Nano Banana 2 + Kling 2.5 Turbo) para animar fotos en video sin deformar rostros ni vehículos.
 
 #### 🧠 Modelos y Datos
 
