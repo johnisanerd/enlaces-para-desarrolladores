@@ -893,6 +893,7 @@ Recopilado por [Yamil Ayma](https://github.com/YamilAyma)
 - [Flubber](https://github.com/veltman/flubber): Librería de JavaScript para interpolar y transformar formas SVG mediante transiciones fluidas, ideal para animaciones de iconos y gráficos interactivos.
 - [Zdog](https://github.com/metafizzy/zdog): Motor ligero de pseudo-3D para JavaScript que permite crear y animar ilustraciones tridimensionales mediante Canvas o SVG, con una estética vectorial y sencilla.
 - [Perfect Freehand](https://github.com/steveruizok/perfect-freehand): Librería de JavaScript para crear trazos de dibujo a mano con grosor variable y sensibilidad a la presión, ideal para pizarras, firmas y herramientas de anotación.
+- [uFuzzy](https://github.com/leeoniya/uFuzzy): Motor ligero de búsqueda difusa para JavaScript que filtra y ordena resultados tolerando coincidencias parciales, ideal para autocompletado y buscadores locales.
 - [Watermelon UI](https://ui.watermelon.sh/home): Colección de componentes UI, paneles y bloques listos para aplicaciones React.
 - [sonner](https://sonner.emilkowal.ski/): Librería de notificaciones tipo toast elegante y ligera para aplicaciones React.
 - [web-haptics](https://haptics.lochie.me/): Biblioteca para añadir respuestas táctiles y hápticas en la web móvil.
