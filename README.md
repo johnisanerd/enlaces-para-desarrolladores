@@ -215,6 +215,8 @@ Recopilado por [Yamil Ayma](https://github.com/YamilAyma)
 
 - [GetYouTubeTranscript API](https://getyoutubetranscript.com/docs): API REST para obtener transcripciones de videos de YouTube con marcas de tiempo, idiomas de subtítulos, búsqueda de videos y listados de canales y listas de reproducción, con especificación OpenAPI, SDKs para Python y Node.js y un servidor MCP para agentes de IA. Cuenta gratuita con 100 créditos; planes de pago desde 5 USD al mes.
 
+- [YouTube Transcript API](https://apify.com/johnvc/youtubetranscripts): API y herramienta MCP alojada que devuelve en JSON las transcripciones con marcas de tiempo y subtítulos de hasta 100 videos o Shorts de YouTube por ejecución, o de los videos recientes de un canal. Funciona en Apify y se cobra por video.
+
 - [SiftingIO](https://sifting.io/docs): API de datos de mercado en tiempo real por REST y WebSocket, con datos históricos por REST para acciones y ETF de EE. UU., divisas, materias primas y criptomonedas. Requiere una clave; el plan gratuito tiene límites y es para uso interno no comercial.
 
 - [Gotenberg](https://github.com/gotenberg/gotenberg): API sin estado empaquetada en Docker para convertir documentos HTML, Markdown y Office en archivos PDF de forma automatizada.
